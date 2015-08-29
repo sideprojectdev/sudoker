@@ -11,16 +11,12 @@ public class Cell {
     private Set<Integer> possibleValueList;
     private boolean status;
 
-    public Cell(int value, int row, int col){
+    public Cell(int value){
         setValue(value);
-        this.row = row;
-        this.col = col;
         this.status = false;
     }
 
-    public Cell(int row, int col){
-        this.row = row;
-        this.col = col;
+    public Cell(){
         this.value = 0;
         this.status = true;
     }
@@ -28,7 +24,6 @@ public class Cell {
     public void setValue(int value){
         if (!this.status) {
             this.value = value;
-            this.status = false;
         }
     }
 
@@ -44,40 +39,38 @@ public class Cell {
         return this.row;
     }
 
+    public void cellRefresh(){
+        this.value = 0;
+        this.status = true;
+    }
+
     public Set<Integer> getPossibleValue(){
         return this.getPossibleValue();
     }
 
-    public boolean addPossibleValue(int possibleValue){
+    public void addPossibleValue(int possibleValue){
         this.possibleValueList.add(possibleValue);
-        return !this.possibleValueList.contains(possibleValue);
     }
 
-    public boolean delPossibleValue(int possibleValue){
+    public void delPossibleValue(int possibleValue){
         if (this.possibleValueList.contains(possibleValue)){
             this.possibleValueList.remove(possibleValue);
             update();
-            return true;
-        }
-        else{
-            return false;
         }
     }
 
     public void update(){
         if (readyForChange()) {
             setValue((int) possibleValueList.toArray()[0]);
-            this.status = false;
-        } else {
         }
     }
 
     public boolean isEmpty(){
-        return this.possibleValueList.isEmpty();
+        return this.getValue() == 0;
     }
 
     private boolean readyForChange() {
-        return (this.possibleValueList.size() == 1) && (this.status);
+        return (this.possibleValueList.size() == 1) && (this.isEmpty() );
     }
 
 }
