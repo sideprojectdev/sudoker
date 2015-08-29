@@ -7,20 +7,20 @@ import java.lang.*;
  * Created by qhyu on 2015-08-28.
  */
 public class Cell {
-    private int value, row, line;
+    private int value, row, col;
     private Set<Integer> possibleValueList;
     private boolean status;
 
-    public Cell(int value, int row, int line){
+    public Cell(int value, int row, int col){
         setValue(value);
         this.row = row;
-        this.line = line;
+        this.col = col;
         this.status = false;
     }
 
-    public Cell(int row, int line){
+    public Cell(int row, int col){
         this.row = row;
-        this.line = line;
+        this.col = col;
         this.value = 0;
         this.status = true;
     }
@@ -37,7 +37,7 @@ public class Cell {
     }
 
     public int getLine(){
-        return this.line;
+        return this.col;
     }
 
     public int getRow(){
@@ -65,7 +65,7 @@ public class Cell {
     }
 
     public void update(){
-        if ((this.possibleValueList.size() == 1) && (this.status)) {
+        if (readyForChange()) {
             setValue((int) possibleValueList.toArray()[0]);
             this.status = false;
         } else {
@@ -76,6 +76,8 @@ public class Cell {
         return this.possibleValueList.isEmpty();
     }
 
-
+    private boolean readyForChange() {
+        return (this.possibleValueList.size() == 1) && (this.status);
+    }
 
 }

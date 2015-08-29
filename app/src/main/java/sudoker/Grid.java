@@ -12,7 +12,7 @@ public class Grid {
     public Grid() {
         board = new ArrayList<ArrayList<Cell>>(9);
         for (int i = 0; i < 8; i++) {
-            board.set(i, newEmptyRow());
+            board.set(i, newEmptyRow(i));
         }
     }
 
@@ -36,12 +36,12 @@ public class Grid {
         }
     }
 
-    private ArrayList<Cell> newEmptyRow() {
-        row = new ArrayList<Cell>(9);
-        for (int j=0; j<8; j++) {
-            row.set(j, new Cell());
+    private ArrayList<Cell> newEmptyRow(int row) {
+        ArrayList<Cell> rowOfCells = new ArrayList<Cell>(9);
+        for (int col=0; col<8; col++) {
+            rowOfCells.set(col, new Cell(row, col));
         }
-        return row;
+        return rowOfCells;
     }
 
     public String toString() {
