@@ -10,6 +10,9 @@ public class Grid {
     private ArrayList<ArrayList<Cell>> board;
 
     public Grid() {
+        ArrayList<RowTracker> rowTrackers = new ArrayList<RowTracker>(9);
+        ArrayList<ColTracker> colTrackers = new ArrayList<ColTracker>(9);
+        ArrayList<SubGridTracker> subGridTrackers = new ArrayList<SubGridTracker>(9);
         board = new ArrayList<ArrayList<Cell>>(9);
         for (int i = 0; i < 8; i++) {
             board.set(i, newEmptyRow(i));
