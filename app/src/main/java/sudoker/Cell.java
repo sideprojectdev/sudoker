@@ -3,10 +3,12 @@ package sudoker;
 import java.util.*;
 import java.lang.*;
 
+
+
 /**
  * Created by qhyu on 2015-08-28.
  */
-public class Cell {
+public class Cell extends Observable{
     private int value, row, col;
     private Set<Integer> possibleValueList;
     private boolean status;
@@ -62,6 +64,8 @@ public class Cell {
     public void update(){
         if (readyForChange()) {
             setValue((int) possibleValueList.toArray()[0]);
+            setChanged();
+            notifyObservers(getValue());
         }
     }
 
