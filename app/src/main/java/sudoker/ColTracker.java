@@ -2,11 +2,12 @@ package sudoker;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by qhyu on 2015-08-29.
  */
-public class ColTracker {
+public class ColTracker implements Observer{
 
     private ArrayList<Cell> col;
 
@@ -22,6 +23,14 @@ public class ColTracker {
             }
             c.update();
         }
+    }
+
+    public ArrayList<Cell> getColTracker(){
+        return this.col;
+    }
+
+    public void setColTracker(ArrayList<Cell> col){
+        this.col = col;
     }
 
 }

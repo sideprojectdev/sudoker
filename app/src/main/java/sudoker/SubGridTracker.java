@@ -2,11 +2,12 @@ package sudoker;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by qhyu on 2015-08-29.
  */
-public class SubGridTracker {
+public class SubGridTracker implements Observer{
 
     private ArrayList<ArrayList<Cell>> subGrid;
 
@@ -27,6 +28,14 @@ public class SubGridTracker {
                 c.update();
             }
         }
+    }
+
+    public ArrayList<ArrayList<Cell>> getSubGridTracker(){
+        return this.subGrid;
+    }
+
+    public void setColTracker(ArrayList<ArrayList<Cell>> subGrid){
+        this.subGrid = subGrid;
     }
 
 }

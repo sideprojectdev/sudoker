@@ -8,11 +8,14 @@ import java.util.ArrayList;
 public class Grid {
 
     private ArrayList<ArrayList<Cell>> board;
+    private ArrayList<RowTracker> rowTrackers;
+    private ArrayList<ColTracker> colTrackers;
+    private ArrayList<ArrayList<SubGridTracker>> subGridTrackers;
 
     public Grid() {
-        ArrayList<RowTracker> rowTrackers = new ArrayList<RowTracker>(9);
-        ArrayList<ColTracker> colTrackers = new ArrayList<ColTracker>(9);
-        ArrayList<SubGridTracker> subGridTrackers = new ArrayList<SubGridTracker>(9);
+        rowTrackers = new ArrayList<RowTracker>(9);
+        colTrackers = new ArrayList<ColTracker>(9);
+        subGridTrackers = new ArrayList<ArrayList<SubGridTracker>>(3);
         board = new ArrayList<ArrayList<Cell>>(9);
         for (int i = 0; i < 8; i++) {
             board.set(i, newEmptyRow(i));
@@ -42,7 +45,14 @@ public class Grid {
     private ArrayList<Cell> newEmptyRow(int row) {
         ArrayList<Cell> rowOfCells = new ArrayList<Cell>(9);
         for (int col=0; col<8; col++) {
-            rowOfCells.set(col, new Cell(row, col));
+            Cell cell = new Cell();
+            rowOfCells.set(col, cell);
+            rowTrackers.get(row).getRowTracker().set(col, cell);
+            colTrackers.get(col).getColTracker().set(row, cell);
+            subGridTrackers.get(col / 3).get(row / 3).getSubGridTracker().get(col % 3).set(row % 3, cell);
+            cell.addObserver(rowTrackers.get(row));
+            cell.addObserver(colTrackers.get(col));
+            cell.addObserver(subGridTrackers.get(col / 3).get(row / 3));
         }
         return rowOfCells;
     }
