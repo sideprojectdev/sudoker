@@ -34,10 +34,14 @@ public class Grid {
         return true;
     }
 
-    public void solve() {
+    public Cell getCell(int row, int col) {
+        return board.get(row).get(col);
+    }
+
+    public void parseArray(ArrayList<ArrayList<Integer>> matrix) {
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                board.get(row).get(col).update();
+                getCell(row,col).setValue(matrix.get(row).get(col));
             }
         }
     }
