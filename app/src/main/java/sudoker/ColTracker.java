@@ -1,6 +1,7 @@
 package sudoker;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -32,5 +33,7 @@ public class ColTracker implements Observer{
     public void setColTracker(ArrayList<Cell> col){
         this.col = col;
     }
+
+
 
 }

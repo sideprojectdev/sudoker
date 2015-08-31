@@ -16,11 +16,13 @@ public class Cell extends Observable{
     public Cell(int value){
         setValue(value);
         this.status = false;
+        for(int i = 1; i < 10; i++) {if (i != value) {this.addPossibleValue(i);}}
     }
 
     public Cell(){
         this.value = 0;
         this.status = true;
+        for(int i = 1; i < 10; i++){this.addPossibleValue(i);}
     }
 
     public void setValue(int value){
@@ -47,7 +49,7 @@ public class Cell extends Observable{
     }
 
     public Set<Integer> getPossibleValue(){
-        return this.getPossibleValue();
+        return this.possibleValueList;
     }
 
     public void addPossibleValue(int possibleValue){
