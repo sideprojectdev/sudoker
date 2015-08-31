@@ -7,12 +7,14 @@ import java.io.FileNotFoundException;
  */
 public class tester {
     public static void main(String[] args) throws FileNotFoundException {
-        String address = new String();
+        String address = "D:\\fun\\sideproject\\sudoker\\app\\src\\main\\java\\sudoker\\sudoku1.txt";
         Sudoker sudoker = new Sudoker();
         sudoker.load(address);
-        sudoker.toString();
+        System.out.println(sudoker.toString());
         sudoker.solve();
-        sudoker.toString();
+        System.out.println();
+        System.out.println(sudoker.toString());
+        System.exit(0);
 
     }
 }

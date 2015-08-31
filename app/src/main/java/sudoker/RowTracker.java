@@ -13,15 +13,15 @@ public class RowTracker extends Structure implements Observer{
 
     public RowTracker() {
         row = new ArrayList<Cell>(9);
+        for (int i=0;i<9;i++){row.add(new Cell());}
     }
 
     public void update(Observable cell, Object o) {
-        Integer value = (int)o;
+        Integer value = (Integer)o;
         for (Cell c: row) {
             if (c.getPossibleValue().contains(value)) {
                 c.delPossibleValue(value);
             }
-            c.update();
         }
     }
 
@@ -32,4 +32,5 @@ public class RowTracker extends Structure implements Observer{
     public void setRowTracker(ArrayList<Cell> row){
         this.row = row;
     }
+
 }

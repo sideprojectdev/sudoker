@@ -10,7 +10,7 @@ import java.lang.*;
  */
 public class Cell extends Observable{
     private int value, row, col;
-    private Set<Integer> possibleValueList;
+    private Set<Integer> possibleValueList = new HashSet<Integer>();
     private boolean status;
 
     public Cell(int value){
@@ -26,9 +26,13 @@ public class Cell extends Observable{
     }
 
     public void setValue(int value){
-        if (!this.status) {
+        if (this.status) {
             this.value = value;
+            setChanged();
+            notifyObservers(getValue());
+            
         }
+        
     }
 
     public int getValue(){
@@ -59,7 +63,6 @@ public class Cell extends Observable{
     public void delPossibleValue(int possibleValue){
         if (this.possibleValueList.contains(possibleValue)){
             this.possibleValueList.remove(possibleValue);
-            update();
         }
     }
 
