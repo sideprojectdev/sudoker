@@ -18,7 +18,17 @@ public class Sudoker {
 
     }
 
-    public void solve() {
 
+    public void solve() {
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                board.getCell(row,col).update();
+            }
+        }
     }
+    
+    public String toString() {
+        return board.toString();
+    }
+
 }
