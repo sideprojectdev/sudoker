@@ -13,8 +13,11 @@ public class SubGridTracker implements Observer{
 
     public SubGridTracker() {
         subGrid = new ArrayList<ArrayList<Cell>>(3);
-        for (int row=0; row<8; row++) {
-            subGrid.set(row,new ArrayList<Cell>(3));
+        for (int row=0; row<3; row++) {
+            subGrid.add(new ArrayList<Cell>(3));
+            for(int col = 0; col < 3; col++){
+            	subGrid.get(row).add(new Cell());
+            }
         }
     }
 
@@ -25,7 +28,6 @@ public class SubGridTracker implements Observer{
                 if (c.getPossibleValue().contains(value)) {
                     c.delPossibleValue(value);
                 }
-                c.update();
             }
         }
     }

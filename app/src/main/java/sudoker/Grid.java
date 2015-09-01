@@ -62,7 +62,7 @@ public class Grid {
             rowOfCells.add(cell);
             rowTrackers.get(row).getRowTracker().set(col, cell);
             colTrackers.get(col).getColTracker().set(row, cell);
-            subGridTrackers.get(col / 3).get(row / 3).getSubGridTracker().get(col % 3).set(row % 3, cell);
+            subGridTrackers.get(row / 3).get(col / 3).getSubGridTracker().get(row % 3).set(col % 3, cell);
             cell.addObserver(rowTrackers.get(row));
             cell.addObserver(colTrackers.get(col));
             cell.addObserver(subGridTrackers.get(col / 3).get(row / 3));

@@ -22,7 +22,6 @@ public class ColTracker implements Observer{
         for (Cell c: col) {
             if (c.getPossibleValue().contains(value)) {
                 c.delPossibleValue(value);
-                c.update();
             }
         }
     }

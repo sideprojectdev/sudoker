@@ -21,7 +21,6 @@ public class RowTracker extends Structure implements Observer{
         for (Cell c: row) {
             if (c.getPossibleValue().contains(value)) {
                 c.delPossibleValue(value);
-                c.update();
             }
         }
     }

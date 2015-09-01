@@ -55,6 +55,10 @@ public class Cell extends Observable{
     public Set<Integer> getPossibleValue(){
         return this.possibleValueList;
     }
+    
+    public void setPossibleValue(Set<Integer> possibleValueList){
+    	this.possibleValueList = possibleValueList;
+    }
 
     public void addPossibleValue(int possibleValue){
         this.possibleValueList.add(possibleValue);
@@ -76,6 +80,13 @@ public class Cell extends Observable{
 
     public boolean isEmpty(){
         return this.getValue() == 0;
+    }
+    
+    public void clearPossibleValueList(){
+    	if (!isEmpty()){
+    		this.setPossibleValue(new HashSet<Integer>());
+    		this.addPossibleValue(value);
+    	}
     }
 
     private boolean readyForChange() {
