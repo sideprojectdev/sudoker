@@ -69,6 +69,14 @@ public class Grid {
         }
         return rowOfCells;
     }
+    
+    public void trackersUpdate(){
+    	for(int i = 0; i < 9; i++){
+    		rowTrackers.get(i).fill();
+    		colTrackers.get(i).fill();
+    		subGridTrackers.get(i / 3).get(i % 3).fill();
+    	}
+    }
 
     public String toString() {
         String flag = "";
