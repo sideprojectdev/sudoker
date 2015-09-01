@@ -33,7 +33,10 @@ public class RowTracker extends Structure implements Observer{
                     index.add(col);
             }
             if (index.size() == 1)
+            {
                 row.get(index.get(0)).setValue(value);
+            	//System.out.println("Col "+ index.get(0) +" to Value "+ value);
+            }
         }
     }
 

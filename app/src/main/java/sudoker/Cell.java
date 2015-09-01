@@ -30,10 +30,11 @@ public class Cell extends Observable{
             this.value = value;
             setChanged();
             notifyObservers(getValue());
-            
+            this.clearPossibleValueList();
         }
-        
     }
+        
+    
 
     public int getValue(){
         return this.value;

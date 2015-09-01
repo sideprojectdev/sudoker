@@ -34,7 +34,11 @@ public class ColTracker implements Observer{
                     index.add(row);
             }
             if (index.size() == 1)
+            {
                 col.get(index.get(0)).setValue(value);
+                //System.out.println("Row"+index.get(0) +"Value "+ value);
+            }
+            
         }
     }
 
