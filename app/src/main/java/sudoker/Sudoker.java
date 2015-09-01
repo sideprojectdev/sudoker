@@ -37,14 +37,22 @@ public class Sudoker {
 
     public void solve() {
         System.out.println("Solving...");
-        while(!board.isComplete()) {
+        //while(!board.isComplete()) {
+        for(int i = 0; i<1000;i++){
 	        for (int row = 0; row <9; row++) {
 	            for (int col = 0; col <9; col++) {
 	                board.getCell(row,col).update();
 	            }
 	        }
+	        trackersUpdate();
         }
+        
     }
+    
+    public void trackersUpdate(){
+    	board.trackersUpdate();
+    }
+    
 
     public String toString() {
         return board.toString();
