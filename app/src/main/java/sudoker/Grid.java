@@ -50,7 +50,6 @@ public class Grid {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 getCell(row,col).setValue(matrix.get(row).get(col));//different constructor when 0;
-                //System.out.println(getCell(0,0).getValue());
             }
         }
     }
@@ -65,7 +64,7 @@ public class Grid {
             subGridTrackers.get(row / 3).get(col / 3).getSubGridTracker().get(row % 3).set(col % 3, cell);
             cell.addObserver(rowTrackers.get(row));
             cell.addObserver(colTrackers.get(col));
-            cell.addObserver(subGridTrackers.get(col / 3).get(row / 3));
+            cell.addObserver(subGridTrackers.get(row / 3).get(col / 3));
         }
         return rowOfCells;
     }
@@ -83,12 +82,8 @@ public class Grid {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col <9; col++) {
                 flag+=String.valueOf(getCell(row,col).getValue());
-                //System.out.println(flag);
-               // System.out.println(getCell(row,col).getValue());
             }
             flag+="\n";
-           // System.out.println(flag);
-           // System.out.println();
         }
         return flag;
     }
