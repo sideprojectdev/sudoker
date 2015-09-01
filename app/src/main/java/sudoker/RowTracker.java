@@ -21,7 +21,20 @@ public class RowTracker extends Structure implements Observer{
         for (Cell c: row) {
             if (c.getPossibleValue().contains(value)) {
                 c.delPossibleValue(value);
+                c.update();
             }
+        }
+    }
+
+    public void fill() {
+        for (int value = 1; value < 10; value++) {
+            ArrayList<Integer> index = new ArrayList();
+            for (int col = 0; col < 9; col++) {
+                if(row.get(col).getPossibleValue().contains(value))
+                    index.add(col);
+            }
+            if (index.size() == 1)
+                row.get(index.get(0)).setValue(value);
         }
     }
 

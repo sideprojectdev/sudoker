@@ -22,7 +22,20 @@ public class ColTracker implements Observer{
         for (Cell c: col) {
             if (c.getPossibleValue().contains(value)) {
                 c.delPossibleValue(value);
+                c.update();
             }
+        }
+    }
+
+    public void fill() {
+        for (int value = 1; value < 10; value++) {
+            ArrayList<Integer> index = new ArrayList();
+            for (int row = 0; row < 9; row++) {
+                if(col.get(row).getPossibleValue().contains(value))
+                    index.add(row);
+            }
+            if (index.size() == 1)
+                col.get(index.get(0)).setValue(value);
         }
     }
 

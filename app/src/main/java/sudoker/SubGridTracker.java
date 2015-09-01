@@ -30,6 +30,22 @@ public class SubGridTracker implements Observer{
         }
     }
 
+    public void fill() {
+        for (int value = 1; value < 10; value++) {
+            ArrayList<Integer> index = new ArrayList();
+            for (int row = 0; row < 3; row++) {
+                for (int col = 0; col < 3; col++) {
+                    if (subGrid.get(row).get(col).getPossibleValue().contains(value)) {
+                        index.add(row);
+                        index.add(col);
+                    }
+                }
+            }
+            if (index.size() == 2)
+                subGrid.get(index.get(0)).get(index.get(1)).setValue(value);
+        }
+    }
+
     public ArrayList<ArrayList<Cell>> getSubGridTracker(){
         return this.subGrid;
     }
