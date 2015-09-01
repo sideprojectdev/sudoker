@@ -43,8 +43,10 @@ public class SubGridTracker implements Observer{
                     }
                 }
             }
-            if (index.size() == 2)
+            if (index.size() == 2) {
                 subGrid.get(index.get(0)).get(index.get(1)).setValue(value);
+            }
+         
         }
     }
 

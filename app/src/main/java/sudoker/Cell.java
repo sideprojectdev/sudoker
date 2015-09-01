@@ -11,28 +11,18 @@ import java.lang.*;
 public class Cell extends Observable{
     private int value, row, col;
     private Set<Integer> possibleValueList = new HashSet<Integer>();
-    private boolean status;
-
-    public Cell(int value){
-        setValue(value);
-        this.status = false;
-        for(int i = 1; i < 10; i++) {if (i != value) {this.addPossibleValue(i);}}
-    }
 
     public Cell(){
+    	this.row = row;
+    	this.col = col;
         this.value = 0;
-        this.status = true;
         for(int i = 1; i < 10; i++){this.addPossibleValue(i);}
     }
 
     public void setValue(int value){
-        if (this.status) {
-            this.value = value;
-            setChanged();
-            notifyObservers(getValue());
-            
-        }
-        
+        this.value = value;
+        setChanged();
+        notifyObservers(getValue());
     }
 
     public int getValue(){
@@ -49,7 +39,6 @@ public class Cell extends Observable{
 
     public void cellRefresh(){
         this.value = 0;
-        this.status = true;
     }
 
     public Set<Integer> getPossibleValue(){
@@ -92,5 +81,8 @@ public class Cell extends Observable{
     private boolean readyForChange() {
         return (this.possibleValueList.size() == 1) && (this.isEmpty() );
     }
-
+    
+    public String toString() {
+    	return String.valueOf(this.value);
+    }
 }

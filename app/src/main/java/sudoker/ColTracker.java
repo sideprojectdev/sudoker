@@ -33,8 +33,9 @@ public class ColTracker implements Observer{
                 if(col.get(row).getPossibleValue().contains(value))
                     index.add(row);
             }
-            if (index.size() == 1)
+            if (index.size() == 1) {
                 col.get(index.get(0)).setValue(value);
+            }
         }
     }
 

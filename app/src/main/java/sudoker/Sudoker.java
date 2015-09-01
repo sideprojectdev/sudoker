@@ -25,10 +25,6 @@ public class Sudoker {
             matrix.add(new ArrayList<Integer>());
             for (int j = 0; j < 9; j++){
             	matrix.get(i).add(Integer.valueOf(str.charAt(j))-48);
-            	//System.out.println(j);
-            	//System.out.println(str.indexOf(j));
-            	//System.out.println((Integer)str.indexOf(j));
-            	//System.out.println();
             	}
         }
         board.parseArray(matrix);
@@ -38,7 +34,7 @@ public class Sudoker {
     public void solve() {
         System.out.println("Solving...");
         //while(!board.isComplete()) {
-        for(int i = 0; i<10000;i++){
+        for(int i = 0; i<10;i++){
 	        for (int row = 0; row <9; row++) {
 	            for (int col = 0; col <9; col++) {
 	                board.getCell(row,col).update();
