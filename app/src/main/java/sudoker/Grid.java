@@ -103,6 +103,11 @@ public class Grid {
     	return position;
     }
     
+    public Grid copyGrid(){
+    	Grid copyGrid = new Grid();
+    	for(int row = 0; row < 9; row ++){for(int col = 0; col < 9; col ++){copyGrid.getCell(row, col).setValue(board.get(row).get(col).getValue());}}
+    	return copyGrid;
+    }
     ///////////////////////////////////
     //PRIVATE HELPERS BELOW THIS LINE//
     ///////////////////////////////////
