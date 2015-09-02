@@ -74,7 +74,6 @@ public class Sudoker {
     	for (int row = 0; row <9; row++) {
             for (int col = 0; col <9; col++) {
             	if ((row == 0) && (col == 6))
-            		System.out.println("0,6's PV is " + board.getCell(row, col).getPossibleValue() + " and it's value is " + board.getCell(row, col).getValue());
                 board.getCell(row,col).update();
             }
         }
