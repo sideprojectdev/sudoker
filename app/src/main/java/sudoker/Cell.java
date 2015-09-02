@@ -89,9 +89,14 @@ public class Cell extends Observable{
     		this.addPossibleValue(value);
     	}
     }
-
+    
+    public int possibleValueNumber(){
+    	return getPossibleValue().size();
+    }
+    
     private boolean readyForChange() {
         return (this.possibleValueList.size() == 1) && (this.isEmpty() );
     }
+    
 
 }
