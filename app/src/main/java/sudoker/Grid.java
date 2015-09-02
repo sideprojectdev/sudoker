@@ -1,6 +1,7 @@
 package sudoker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by qhyu on 2015-08-29.
@@ -80,6 +81,25 @@ public class Grid {
            // System.out.println();
         }
         return flag;
+    }
+    
+    public List<Integer> findTheCellWithTheLeastPossibleValue(){
+    	List<Integer> position = new ArrayList<Integer>(2);
+    	position.add(0);
+    	position.add(0);
+    	Integer leastPossibleValueNumber = 9;
+    	Integer localPossibleValueNumber = 0;
+    	for(int row = 0; row < 9; row ++){
+    		for(int col = 0; col < 9; col ++){
+        		if ((localPossibleValueNumber < leastPossibleValueNumber) && 
+        				(localPossibleValueNumber > 1)){
+        			leastPossibleValueNumber = localPossibleValueNumber;
+        			position.set(0, row);
+        			position.set(1, col);
+        		}
+        	}
+    	}
+    	return position;
     }
     
     ///////////////////////////////////
