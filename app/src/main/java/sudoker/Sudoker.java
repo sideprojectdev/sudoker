@@ -32,7 +32,7 @@ public class Sudoker {
         	String temp = board.toString();
 	        fillAllSingleSpots();
 	        trackersUpdate();
-	        if (madeNoProgress(temp)){
+	        if (madeNoProgress(temp, this.board)){
 	        	solveByTree(board);
 	        	break;
 	        }
@@ -45,7 +45,8 @@ public class Sudoker {
         	String temp = board.toString();
 	        fillAllSingleSpots();
 	        trackersUpdate();
-	        if (madeNoProgress(temp)){
+	        System.out.println("not able to");
+	        if (madeNoProgress(temp, board)){
 	        	solveByTree(board);
 	        	break;
 	        }
@@ -61,8 +62,8 @@ public class Sudoker {
     ///////////////////////////////////
     
     
-    private boolean madeNoProgress(String temp){
-    	return temp == board.toString();
+    private boolean madeNoProgress(String temp, Grid board){
+    	return temp.equals(board.toString());
     }
     
     private void trackersUpdate(){
@@ -72,6 +73,8 @@ public class Sudoker {
     private void fillAllSingleSpots() {
     	for (int row = 0; row <9; row++) {
             for (int col = 0; col <9; col++) {
+            	if ((row == 0) && (col == 6))
+            		System.out.println("0,6's PV is " + board.getCell(row, col).getPossibleValue() + " and it's value is " + board.getCell(row, col).getValue());
                 board.getCell(row,col).update();
             }
         }
@@ -101,8 +104,11 @@ public class Sudoker {
     	System.out.println("Solving by trees.");
     	ArrayList<Integer> posiitonOfBreakPoint = board.findTheCellWithTheLeastPossibleValue();
     	Cell breakPoint = board.getCell(posiitonOfBreakPoint.get(0), posiitonOfBreakPoint.get(1));
+    	System.out.println(breakPoint.getPossibleValue());
     	for (int value : breakPoint.getPossibleValue()) {
     		Grid tempBoard = board.copyGrid();
+    		System.out.println(tempBoard);
+    		System.out.println(posiitonOfBreakPoint);
     		Cell trial = tempBoard.getCell(posiitonOfBreakPoint.get(0), posiitonOfBreakPoint.get(1));
     		trial.setValue(value);
     		solve(tempBoard);
