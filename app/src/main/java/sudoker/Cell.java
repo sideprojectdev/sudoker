@@ -93,7 +93,7 @@ public class Cell extends Observable{
     }
     
     private boolean readyForChange() {
-        return (this.possibleValueList.size() == 1) && (this.isEmpty() );
+        return (possibleValueNumber() == 1) && (this.isEmpty() );
     }
     
 

@@ -86,11 +86,11 @@ public class Grid {
     	ArrayList<Integer> position = new ArrayList<Integer>(2);
     	position.add(0);
     	position.add(0);
-    	Integer leastPossibleValueNumber = 9;
-    	Integer localPossibleValueNumber = 0;
+    	int leastPossibleValueNumber = 9;
+    	int localPossibleValueNumber = 0;
     	for(int row = 0; row < 9; row ++){
     		for(int col = 0; col < 9; col ++){
-    			localPossibleValueNumber = getCell(row,col).possibleValueNumber();    			
+    			localPossibleValueNumber = getCell(row,col).possibleValueNumber();
         		if ((localPossibleValueNumber < leastPossibleValueNumber) && 
         				(localPossibleValueNumber > 1)){
         			leastPossibleValueNumber = localPossibleValueNumber;

@@ -76,6 +76,7 @@ public class Sudoker {
     private void fillAllSingleSpots() {
     	for (int row = 0; row <9; row++) {
             for (int col = 0; col <9; col++) {
+            	if ((row == 0) && (col == 6))
                 board.getCell(row,col).update();
             }
         }
