@@ -1,7 +1,6 @@
 package sudoker;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -28,7 +27,7 @@ public class ColTracker implements Observer{
 
     public void fill() {
         for (int value = 1; value < 10; value++) {
-            ArrayList<Integer> index = new ArrayList();
+            ArrayList<Integer> index = new ArrayList<Integer>();
             for (int row = 0; row < 9; row++) {
                 if(col.get(row).getPossibleValue().contains(value))
                     index.add(row);
