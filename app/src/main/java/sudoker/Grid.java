@@ -24,22 +24,19 @@ public class Grid {
         		subGridTrackers.get(i).add(new SubGridTracker());
         	}
         }
-        board = new ArrayList<ArrayList<Cell>>(9);
-        for (int i = 0; i < 9; i++) {
-            board.add(newEmptyRow(i));
-        }
+        board = CellStructureFactory.createGridOfCell(9, 9);
+        linkCellsToTrackers();
     }
 
-    public boolean isComplete() {
-        boolean flag = true;
+    public boolean isNotComplete() {
         for (int row = 0; row <9; row++) {
             for (int col = 0; col <9; col++) {
-                if (board.get(row).get(col).isEmpty()) {
-                    return false;
+                if (getCell(row,col).isEmpty()) {
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     public Cell getCell(int row, int col) {
@@ -54,21 +51,6 @@ public class Grid {
                 //System.out.println("Row:"+row +"Col"+ col +"Value"+ matrix.get(row).get(col) + "PL:" +getCell(row,col).getPossibleValue() );
             }
         }
-    }
-
-    private ArrayList<Cell> newEmptyRow(int row) {
-        ArrayList<Cell> rowOfCells = new ArrayList<Cell>(9);
-        for (int col=0; col<9; col++) {
-            Cell cell = new Cell();
-            rowOfCells.add(cell);
-            rowTrackers.get(row).getRowTracker().set(col, cell);
-            colTrackers.get(col).getColTracker().set(row, cell);
-            subGridTrackers.get(row / 3).get(col / 3).getSubGridTracker().get(row % 3).set(col % 3, cell);
-            cell.addObserver(rowTrackers.get(row));
-            cell.addObserver(colTrackers.get(col));
-            cell.addObserver(subGridTrackers.get(row / 3).get(col / 3));
-        }
-        return rowOfCells;
     }
     
     public void trackersUpdate(){
@@ -98,5 +80,23 @@ public class Grid {
            // System.out.println();
         }
         return flag;
+    }
+    
+    ///////////////////////////////////
+    //PRIVATE HELPERS BELOW THIS LINE//
+    ///////////////////////////////////
+    
+    private void linkCellsToTrackers() {
+    	for (int row = 0; row < 9; row++) {
+	    	for (int col = 0; col < 9; col++) {
+	            Cell cell = getCell(row,col);
+	            rowTrackers.get(row).getRowTracker().set(col, cell);
+	            colTrackers.get(col).getColTracker().set(row, cell);
+	            subGridTrackers.get(row / 3).get(col / 3).getSubGridTracker().get(row % 3).set(col % 3, cell);
+	            cell.addObserver(rowTrackers.get(row));
+	            cell.addObserver(colTrackers.get(col));
+	            cell.addObserver(subGridTrackers.get(row / 3).get(col / 3));
+	        }
+    	}
     }
 }

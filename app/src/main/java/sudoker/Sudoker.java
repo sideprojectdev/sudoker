@@ -18,10 +18,50 @@ public class Sudoker {
 
     public void load(String address) throws FileNotFoundException {
         ArrayList<ArrayList<Integer>> matrix =  new ArrayList<>();
+        Scanner matrixScanner = initializeScannerWithAddress(address);
+        matrix = getSudokuMatrixFromFile(matrixScanner, matrix);
+        board.parseArray(matrix);
+        matrixScanner.close();
+    }
+
+
+    public void solve() {
+        System.out.println("Solving...");
+        while(board.isNotComplete()) {
+        //for(int i = 0; i<10000;i++){
+	        fillAllSingleSpots();
+	        trackersUpdate();
+        }
+    }
+    
+    public String toString() {
+        return board.toString();
+    }
+    
+    ///////////////////////////////////
+    //PRIVATE HELPERS BELOW THIS LINE//
+    ///////////////////////////////////
+    
+    private void trackersUpdate(){
+    	board.trackersUpdate();
+    }
+    
+    private void fillAllSingleSpots() {
+    	for (int row = 0; row <9; row++) {
+            for (int col = 0; col <9; col++) {
+                board.getCell(row,col).update();
+            }
+        }
+    }
+    
+    private Scanner initializeScannerWithAddress(String address) throws FileNotFoundException {
         File sudokerFile = new File(address);
-        Scanner sc = new Scanner(sudokerFile);
-        for (int i = 0; i < 9; i++){
-            String str = sc.nextLine();
+        return new Scanner(sudokerFile);
+    }
+    
+    private ArrayList<ArrayList<Integer>> getSudokuMatrixFromFile(Scanner matrixScanner, ArrayList<ArrayList<Integer>> matrix) {
+    	for (int i = 0; i < 9; i++){
+            String str = matrixScanner.nextLine();
             matrix.add(new ArrayList<Integer>());
             for (int j = 0; j < 9; j++){
             	matrix.get(i).add(Integer.valueOf(str.charAt(j))-48);
@@ -31,32 +71,7 @@ public class Sudoker {
             	//System.out.println();
             	}
         }
-        board.parseArray(matrix);
-    }
-
-
-    public void solve() {
-        System.out.println("Solving...");
-        while(!board.isComplete()) {
-        //for(int i = 0; i<10000;i++){
-	        for (int row = 0; row <9; row++) {
-	            for (int col = 0; col <9; col++) {
-	                board.getCell(row,col).update();
-	            }
-	        }
-	    
-	        trackersUpdate();
-        }
-    }
-        
-    
-    public void trackersUpdate(){
-    	board.trackersUpdate();
-    }
-    
-
-    public String toString() {
-        return board.toString();
+    	return matrix;
     }
 
 }
