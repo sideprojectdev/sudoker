@@ -29,16 +29,26 @@ public class Sudoker {
         System.out.println("Solving...");
         while(board.isNotComplete()) {
         //for(int i = 0; i<10000;i++){
+        	String temp = board.toString();
 	        fillAllSingleSpots();
 	        trackersUpdate();
+	        if (madeNoProgress(temp)){
+	        	solveByTree(board);
+	        	break;
+	        }
         }
     }
     
     public void solve(Grid board) {
         while(board.isNotComplete()) {
         //for(int i = 0; i<10000;i++){
+        	String temp = board.toString();
 	        fillAllSingleSpots();
 	        trackersUpdate();
+	        if (madeNoProgress(temp)){
+	        	solveByTree(board);
+	        	break;
+	        }
         }
     }
     
@@ -49,6 +59,11 @@ public class Sudoker {
     ///////////////////////////////////
     //PRIVATE HELPERS BELOW THIS LINE//
     ///////////////////////////////////
+    
+    
+    private boolean madeNoProgress(String temp){
+    	return temp == board.toString();
+    }
     
     private void trackersUpdate(){
     	board.trackersUpdate();
@@ -82,9 +97,9 @@ public class Sudoker {
     	return matrix;
     }
     
-    private void solveByTree() {
+    private void solveByTree(Grid board) {
     	System.out.println("Solving by trees.");
-    	ArrayList<Integer> posiitonOfBreakPoint = findTheCellWithTheLeastPossibleValue();
+    	ArrayList<Integer> posiitonOfBreakPoint = board.findTheCellWithTheLeastPossibleValue();
     	Cell breakPoint = board.getCell(posiitonOfBreakPoint.get(0), posiitonOfBreakPoint.get(1));
     	for (int value : breakPoint.getPossibleValue()) {
     		Grid tempBoard = board;
