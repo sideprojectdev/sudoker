@@ -111,7 +111,6 @@ public class Sudoker {
     }
     
     private void solveByTree(Grid board) {
-    	System.out.println("Solving by trees.");
     	ArrayList<Integer> posiitonOfBreakPoint = board.findTheCellWithTheLeastPossibleValue();
     	Cell breakPoint = board.getCell(posiitonOfBreakPoint.get(0), posiitonOfBreakPoint.get(1));
     	if (breakPoint.possibleValueNumber() != 1){
@@ -119,7 +118,6 @@ public class Sudoker {
 	    		Grid tempBoard = board.copyGrid();
 	    		Cell trial = tempBoard.getCell(posiitonOfBreakPoint.get(0), posiitonOfBreakPoint.get(1));
 	    		trial.setValue(value);
-	    		System.out.println(tempBoard);
 	    		solve(tempBoard);
 	    		if (!tempBoard.isNotComplete())
 	    			this.board = tempBoard;
