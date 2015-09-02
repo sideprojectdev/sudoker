@@ -102,7 +102,7 @@ public class Sudoker {
     	ArrayList<Integer> posiitonOfBreakPoint = board.findTheCellWithTheLeastPossibleValue();
     	Cell breakPoint = board.getCell(posiitonOfBreakPoint.get(0), posiitonOfBreakPoint.get(1));
     	for (int value : breakPoint.getPossibleValue()) {
-    		Grid tempBoard = board;
+    		Grid tempBoard = board.copyGrid();
     		Cell trial = tempBoard.getCell(posiitonOfBreakPoint.get(0), posiitonOfBreakPoint.get(1));
     		trial.setValue(value);
     		solve(tempBoard);

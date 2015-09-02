@@ -27,7 +27,7 @@ public class RowTracker extends Structure implements Observer{
 
     public void fill() {
         for (int value = 1; value < 10; value++) {
-            ArrayList<Integer> index = new ArrayList();
+            ArrayList<Integer> index = new ArrayList<Integer>();
             for (int col = 0; col < 9; col++) {
                 if(row.get(col).getPossibleValue().contains(value))
                     index.add(col);

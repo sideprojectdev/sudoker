@@ -34,7 +34,7 @@ public class SubGridTracker implements Observer{
 
     public void fill() {
         for (int value = 1; value < 10; value++) {
-            ArrayList<Integer> index = new ArrayList();
+            ArrayList<Integer> index = new ArrayList<Integer>();
             for (int row = 0; row < 3; row++) {
                 for (int col = 0; col < 3; col++) {
                     if (subGrid.get(row).get(col).getPossibleValue().contains(value)) {
