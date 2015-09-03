@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
  */
 public class tester {
     public static void main(String[] args) throws FileNotFoundException {
-        String address = "D:/fun/sideproject/sudoker/app/src/main/java/sudoker/sudoku1.txt";
+        String address = "sudoker/app/src/main/java/sudoker/sudoku1.txt";
         Sudoker sudoker = new Sudoker();
         sudoker.load(address);
         System.out.println(sudoker.toString());
