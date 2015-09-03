@@ -13,8 +13,10 @@ public class ColTracker implements Observer{
 
     public ColTracker() {
         col = new ArrayList<Cell>(9);
-        for (int i=0;i<9;i++){col.add(new Cell());}
-        		}
+        for (int i = 0;i < 9;i++) {
+        	col.add(new Cell());
+        }
+    }
 
     public void update(Observable cell, Object o) {
         Integer value = (Integer)o;
@@ -27,28 +29,42 @@ public class ColTracker implements Observer{
 
     public void fill() {
         for (int value = 1; value < 10; value++) {
-            ArrayList<Integer> index = new ArrayList<Integer>();
-            for (int row = 0; row < 9; row++) {
-                if(col.get(row).getPossibleValue().contains(value))
-                    index.add(row);
-            }
-            if (index.size() == 1)
-            {
-                col.get(index.get(0)).setValue(value);
-                //System.out.println("Row"+index.get(0) +"Value "+ value);
-            }
-            
+            if (thisValueIsNotFilled(value) && valueHasOnlyOnePossiblePosition(value)) {
+                putValueInThePosition(value);
+            }  
         }
     }
 
-    public ArrayList<Cell> getColTracker(){
+    public ArrayList<Cell> getColTracker() {
         return this.col;
     }
 
-    public void setColTracker(ArrayList<Cell> col){
+    public void setColTracker(ArrayList<Cell> col) {
         this.col = col;
     }
+    
+    private boolean thisValueIsNotFilled(int value) {
+    	for (int row = 0; row < 9; row++) {
+            if (col.get(row).getValue() == value)
+                return false;
+        }
+    	return true;
+    }
 
-
+    private boolean valueHasOnlyOnePossiblePosition(int value) {
+    	ArrayList<Integer> index = new ArrayList<Integer>();
+        for (int row = 0; row < 9; row++) {
+            if (col.get(row).getPossibleValue().contains(value))
+                index.add(row);
+        }
+    	return index.size() == 1;
+    }
+    
+    private void putValueInThePosition(int value) {
+    	for (Cell candidate : col) {
+    		if (candidate.getPossibleValue().contains(value))
+    			candidate.setValue(value);
+    	}
+    }
 
 }
