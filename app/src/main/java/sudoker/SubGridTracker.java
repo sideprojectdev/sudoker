@@ -15,9 +15,11 @@ public class SubGridTracker implements Observer{
         subGrid = new ArrayList<ArrayList<Cell>>(3);
         for (int row=0; row<3; row++) {
             subGrid.add(new ArrayList<Cell>(3));
+            /*
             for(int col = 0; col < 3; col++){
             	subGrid.get(row).add(new Cell());
             }
+            */
         }
     }
 
