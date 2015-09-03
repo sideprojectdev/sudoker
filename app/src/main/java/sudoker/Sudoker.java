@@ -27,11 +27,11 @@ public class Sudoker {
     public void solve() {
         System.out.println("Solving...");
         while(board.isNotComplete()) {
-        //for(int i = 0; i<10000;i++){
+        //for(int i = 0; i<10000;i++) {
         	String temp = board.toString();
 	        fillAllSingleSpots();
 	        trackersUpdate();
-	        if (madeNoProgress(temp,board)){
+	        if (madeNoProgress(temp,board)) {
 	        	solveByTree(board);
 	        	break;
 	        }
@@ -40,11 +40,11 @@ public class Sudoker {
     
     public void solve(Grid board) {
         while(board.isNotComplete()) {
-        //for(int i = 0; i<10000;i++){
+        //for(int i = 0; i<10000;i++) {
         	String temp = board.toString();
 	        fillAllSingleSpots(board);
 	        trackersUpdate(board);
-	        if (madeNoProgress(temp,board)){
+	        if (madeNoProgress(temp,board)) {
 	        	solveByTree(board);
 	        	break;
 	        }
@@ -59,16 +59,15 @@ public class Sudoker {
     //PRIVATE HELPERS BELOW THIS LINE//
     ///////////////////////////////////
     
-    
-    private boolean madeNoProgress(String temp, Grid board){
+    private boolean madeNoProgress(String temp, Grid board) {
     	return temp.equals(board.toString());
     }
     
-    private void trackersUpdate(){
+    private void trackersUpdate() {
     	board.trackersUpdate();
     }
     
-    private void trackersUpdate(Grid board){
+    private void trackersUpdate(Grid board) {
     	board.trackersUpdate();
     }
     
@@ -95,16 +94,12 @@ public class Sudoker {
     }
     
     private ArrayList<ArrayList<Integer>> getSudokuMatrixFromFile(Scanner matrixScanner, ArrayList<ArrayList<Integer>> matrix) {
-    	for (int i = 0; i < 9; i++){
+    	for (int i = 0; i < 9; i++) {
             String str = matrixScanner.nextLine();
             matrix.add(new ArrayList<Integer>());
-            for (int j = 0; j < 9; j++){
+            for (int j = 0; j < 9; j++) {
             	matrix.get(i).add(Integer.valueOf(str.charAt(j))-48);
-            	//System.out.println(j);
-            	//System.out.println(str.indexOf(j));
-            	//System.out.println((Integer)str.indexOf(j));
-            	//System.out.println();
-            	}
+            }
         }
     	return matrix;
     }
@@ -112,16 +107,15 @@ public class Sudoker {
     private void solveByTree(Grid board) {
     	ArrayList<Integer> posiitonOfBreakPoint = board.findTheCellWithTheLeastPossibleValue();
     	Cell breakPoint = board.getCell(posiitonOfBreakPoint.get(0), posiitonOfBreakPoint.get(1));
-    	if (breakPoint.possibleValueNumber() != 1){
-	    	for (int value : breakPoint.getPossibleValue()) {
+    	if (breakPoint.getPossibleValueCount() != 1) {
+	    	for (int possibleValue : breakPoint.getPossibleValue()) {
 	    		Grid tempBoard = board.copyGrid();
 	    		Cell trial = tempBoard.getCell(posiitonOfBreakPoint.get(0), posiitonOfBreakPoint.get(1));
-	    		trial.setValue(value);
+	    		trial.setValue(possibleValue);
 	    		solve(tempBoard);
 	    		if (!tempBoard.isNotComplete())
 	    			this.board = tempBoard;
 	    	}
     	}
     }
-
 }
