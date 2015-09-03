@@ -105,7 +105,7 @@ public class Sudoker {
     }
     
     private void solveByTree(Grid board) {
-    	ArrayList<Integer> posiitonOfBreakPoint = board.findTheCellWithTheLeastPossibleValue();
+    	ArrayList<Integer> posiitonOfBreakPoint = board.findPositionOfTheCandidate();
     	Cell breakPoint = board.getCell(posiitonOfBreakPoint.get(0), posiitonOfBreakPoint.get(1));
     	if (breakPoint.getPossibleValueCount() != 1) {
 	    	for (int possibleValue : breakPoint.getPossibleValue()) {

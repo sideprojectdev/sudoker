@@ -13,17 +13,7 @@ public class Grid {
     private ArrayList<ArrayList<SubGridTracker>> subGridTrackers;
 
     public Grid() {
-        rowTrackers = new ArrayList<RowTracker>(9);
-        for (int i = 0; i < 9; i++){rowTrackers.add(new RowTracker());}
-        colTrackers = new ArrayList<ColTracker>(9);
-        for (int i = 0; i < 9; i++){colTrackers.add(new ColTracker());}
-        subGridTrackers = new ArrayList<ArrayList<SubGridTracker>>(3);
-        for (int i = 0; i < 3; i++){
-        	subGridTrackers.add(new ArrayList<SubGridTracker>());
-        	for(int j = 0; j < 3; j++){
-        		subGridTrackers.get(i).add(new SubGridTracker());
-        	}
-        }
+    	initializeTrackers();
         board = CellStructureFactory.createGridOfCell(9, 9);
         linkCellsToTrackers();
     }
@@ -47,53 +37,29 @@ public class Grid {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 getCell(row,col).setValue(matrix.get(row).get(col));
-                
-                //System.out.println("Row:"+row +"Col"+ col +"Value"+ matrix.get(row).get(col) + "PL:" +getCell(row,col).getPossibleValue() );
             }
         }
     }
     
     public void trackersUpdate(){
     	for(int i = 0; i < 9; i++){
-    		//System.out.println("Updating row " + i);
     		rowTrackers.get(i).fill();
-    		//System.out.println(getCell(0,0).getValue());
-    		//System.out.println("Updating col " + i);
     		colTrackers.get(i).fill();
-    		//System.out.println(getCell(0,0).getValue());
-    		//System.out.println("Updating subGrid " + i/3 +" "+ i%3 );
     		subGridTrackers.get(i / 3).get(i % 3).fill();
-    		//System.out.println(getCell(0,0).getValue());
     	}
     }
-
-    public String toString() {
-        String flag = "";
-        for (int row = 0; row < 9; row++) {
-            for (int col = 0; col <9; col++) {
-                flag+=String.valueOf(getCell(row,col).getValue());
-                //System.out.println(flag);
-               // System.out.println(getCell(row,col).getValue());
-            }
-            flag+="\n";
-           // System.out.println(flag);
-           // System.out.println();
-        }
-        return flag;
-    }
-    
-    public ArrayList<Integer> findTheCellWithTheLeastPossibleValue(){
+   
+    public ArrayList<Integer> findPositionOfTheCandidate(){
     	ArrayList<Integer> position = new ArrayList<Integer>(2);
     	position.add(0);
     	position.add(0);
-    	int leastgetPossibleValueCount = 9;
-    	int localgetPossibleValueCount = 0;
+    	int min = 9;
+    	int current = 0;
     	for(int row = 0; row < 9; row ++){
     		for(int col = 0; col < 9; col ++){
-    			localgetPossibleValueCount = getCell(row,col).getPossibleValueCount();
-        		if ((localgetPossibleValueCount < leastgetPossibleValueCount) && 
-        				(localgetPossibleValueCount > 1)){
-        			leastgetPossibleValueCount = localgetPossibleValueCount;
+    			current = getCell(row,col).getPossibleValueCount();
+        		if (cellHasLessPossibleValue(current, min)) {
+        			min = current;
         			position.set(0, row);
         			position.set(1, col);
         		}
@@ -104,12 +70,42 @@ public class Grid {
     
     public Grid copyGrid(){
     	Grid copyGrid = new Grid();
-    	for(int row = 0; row < 9; row ++){for(int col = 0; col < 9; col ++){copyGrid.getCell(row, col).setValue(board.get(row).get(col).getValue());}}
+    	for(int row = 0; row < 9; row ++) {
+    		for(int col = 0; col < 9; col ++) {
+    			copyGrid.getCell(row, col).setValue(board.get(row).get(col).getValue());
+    		}
+    	}
     	return copyGrid;
     }
+    
+    public String toString() {
+        String flag = "";
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col <9; col++) {
+                flag+=String.valueOf(getCell(row,col).getValue());
+            }
+            flag+="\n";
+        }
+        return flag;
+    }
+    
     ///////////////////////////////////
     //PRIVATE HELPERS BELOW THIS LINE//
     ///////////////////////////////////
+    
+    private void initializeTrackers() {
+    	rowTrackers = new ArrayList<RowTracker>(9);
+        for (int i = 0; i < 9; i++){rowTrackers.add(new RowTracker());}
+        colTrackers = new ArrayList<ColTracker>(9);
+        for (int i = 0; i < 9; i++){colTrackers.add(new ColTracker());}
+        subGridTrackers = new ArrayList<ArrayList<SubGridTracker>>(3);
+        for (int i = 0; i < 3; i++){
+        	subGridTrackers.add(new ArrayList<SubGridTracker>());
+        	for(int j = 0; j < 3; j++){
+        		subGridTrackers.get(i).add(new SubGridTracker());
+        	}
+        }
+    }
     
     private void linkCellsToTrackers() {
     	for (int row = 0; row < 9; row++) {
@@ -123,5 +119,10 @@ public class Grid {
 	            cell.addObserver(subGridTrackers.get(row / 3).get(col / 3));
 	        }
     	}
+    }
+    
+    private boolean cellHasLessPossibleValue(int current, int min) {
+    	return (current < min) && 
+		(current > 1);
     }
 }
