@@ -111,9 +111,9 @@ public class Grid {
     	for (int row = 0; row < 9; row++) {
 	    	for (int col = 0; col < 9; col++) {
 	            Cell cell = getCell(row,col);
-	            rowTrackers.get(row).getRowTracker().set(col, cell);
-	            colTrackers.get(col).getColTracker().set(row, cell);
-	            subGridTrackers.get(row / 3).get(col / 3).getSubGridTracker().get(row % 3).set(col % 3, cell);
+	            rowTrackers.get(row).getRowTracker().add(cell);
+	            colTrackers.get(col).getColTracker().add(cell);
+	            subGridTrackers.get(row / 3).get(col / 3).getSubGridTracker().get(row % 3).add(cell);
 	            cell.addObserver(rowTrackers.get(row));
 	            cell.addObserver(colTrackers.get(col));
 	            cell.addObserver(subGridTrackers.get(row / 3).get(col / 3));

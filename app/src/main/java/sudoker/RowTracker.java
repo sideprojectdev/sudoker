@@ -13,7 +13,6 @@ public class RowTracker extends Structure implements Observer{
 
     public RowTracker() {
         row = new ArrayList<Cell>(9);
-        for (int i = 0;i < 9;i++){row.add(new Cell());}
     }
 
     public void update(Observable cell, Object o) {

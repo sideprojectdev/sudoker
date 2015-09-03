@@ -13,9 +13,6 @@ public class ColTracker implements Observer{
 
     public ColTracker() {
         col = new ArrayList<Cell>(9);
-        for (int i = 0;i < 9;i++) {
-        	col.add(new Cell());
-        }
     }
 
     public void update(Observable cell, Object o) {
