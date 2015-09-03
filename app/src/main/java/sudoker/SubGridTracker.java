@@ -31,23 +31,12 @@ public class SubGridTracker implements Observer{
             }
         }
     }
-
+    
     public void fill() {
         for (int value = 1; value < 10; value++) {
-            ArrayList<Integer> index = new ArrayList<Integer>();
-            for (int row = 0; row < 3; row++) {
-                for (int col = 0; col < 3; col++) {
-                    if (subGrid.get(row).get(col).getPossibleValue().contains(value)) {
-                        index.add(row);
-                        index.add(col);
-                    }
-                }
-            }
-            if (index.size() == 2)
-            {
-                subGrid.get(index.get(0)).get(index.get(1)).setValue(value);
-                //System.out.println("subRow:"+index.get(0) +"subCol:"+ index.get(1) +" Value "+ value);
-            }
+            if (thisValueIsNotFilled(value) && valueHasOnlyOnePossiblePosition(value)) {
+                putValueInThePosition(value);
+            }  
         }
     }
 
@@ -57,6 +46,38 @@ public class SubGridTracker implements Observer{
 
     public void setColTracker(ArrayList<ArrayList<Cell>> subGrid){
         this.subGrid = subGrid;
+    }
+    
+    private boolean thisValueIsNotFilled(int value) {
+    	for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+            	if (subGrid.get(row).get(col).getValue() == value)
+            		return false;
+            }
+    	}
+    	return true;
+    }
+
+    private boolean valueHasOnlyOnePossiblePosition(int value) {
+    	ArrayList<Integer> index = new ArrayList<Integer>();
+    	for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                if (subGrid.get(row).get(col).getPossibleValue().contains(value)) {
+                    index.add(row);
+                    index.add(col);
+                }
+            }
+        }
+        return (index.size() == 2);
+    }
+    
+    private void putValueInThePosition(int value) {
+    	for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+    		if (subGrid.get(row).get(col).getPossibleValue().contains(value))
+    			subGrid.get(row).get(col).setValue(value);
+            }
+    	}
     }
 
 }

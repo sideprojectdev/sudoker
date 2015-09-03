@@ -27,16 +27,9 @@ public class RowTracker extends Structure implements Observer{
 
     public void fill() {
         for (int value = 1; value < 10; value++) {
-            ArrayList<Integer> index = new ArrayList<Integer>();
-            for (int col = 0; col < 9; col++) {
-                if(row.get(col).getPossibleValue().contains(value))
-                    index.add(col);
-            }
-            if (index.size() == 1)
-            {
-                row.get(index.get(0)).setValue(value);
-            	//System.out.println("Col "+ index.get(0) +" to Value "+ value);
-            }
+            if (thisValueIsNotFilled(value) && valueHasOnlyOnePossiblePosition(value)) {
+                putValueInThePosition(value);
+            }  
         }
     }
 
@@ -46,6 +39,30 @@ public class RowTracker extends Structure implements Observer{
 
     public void setRowTracker(ArrayList<Cell> row){
         this.row = row;
+    }
+    
+    private boolean thisValueIsNotFilled(int value) {
+    	for (int col = 0; col < 9; col++) {
+            if (row.get(col).getValue() == value)
+                return false;
+        }
+    	return true;
+    }
+
+    private boolean valueHasOnlyOnePossiblePosition(int value) {
+    	ArrayList<Integer> index = new ArrayList<Integer>();
+        for (int col = 0; col < 9; col++) {
+            if (row.get(col).getPossibleValue().contains(value))
+                index.add(col);
+        }
+    	return index.size() == 1;
+    }
+    
+    private void putValueInThePosition(int value) {
+    	for (Cell candidate : row) {
+    		if (candidate.getPossibleValue().contains(value))
+    			candidate.setValue(value);
+    	}
     }
 
 }
