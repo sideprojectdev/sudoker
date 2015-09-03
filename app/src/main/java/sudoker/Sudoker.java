@@ -24,7 +24,6 @@ public class Sudoker {
         matrixScanner.close();
     }
 
-
     public void solve() {
         System.out.println("Solving...");
         while(board.isNotComplete()) {
