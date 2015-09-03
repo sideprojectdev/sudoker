@@ -10,5 +10,5 @@ public abstract class Structure implements Observer {
 
     public abstract void update(Observable cell, Object o);
     public abstract void fill();
-
+    
 }
